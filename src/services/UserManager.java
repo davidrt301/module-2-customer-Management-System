@@ -25,8 +25,9 @@ public class UserManager {
         this.users = new User[0];
     }
 
-     /**
+    /**
      * Create: Crea un nuevo usuario. Solo permitido para Administradores.
+     * 
      * @param actor El usuario que realiza la acción.
      * @return El usuario recién creado, o null si no tiene permisos.
      */
@@ -49,10 +50,12 @@ public class UserManager {
         return newUser;
     }
 
-        /**
+    /**
      * Read: Obtiene el arreglo completo de usuarios. Solo para Administradores.
+     * 
      * @param actor El usuario que realiza la acción.
-     * @return Un arreglo con todos los usuarios, o un arreglo vacío si no tiene permisos.
+     * @return Un arreglo con todos los usuarios, o un arreglo vacío si no tiene
+     *         permisos.
      */
     public User[] getUsers(User actor) {
         if (actor.getRole() == Role.ADMINISTRATOR) {
@@ -61,7 +64,6 @@ public class UserManager {
         }
         return new User[0]; // Los usuarios estándar no pueden ver la lista completa.
     }
-
 
     /**
      * Read: Busca un usuario por su ID.
@@ -76,19 +78,21 @@ public class UserManager {
             }
         }
         return null; // Retorna null si no se encuentra el usuario
-    
+
     }
 
     /**
      * Update: Actualiza los datos de un usuario.
      * - Administradores pueden actualizar a cualquier usuario.
      * - Usuarios Estándar solo pueden actualizar su propio perfil (y no su rol).
-     * @param actor El usuario que realiza la acción.
+     * 
+     * @param actor          El usuario que realiza la acción.
      * @param userIdToUpdate El ID del usuario a modificar.
      * @return true si el usuario fue encontrado y actualizado, false en caso
      *         contrario.
      */
-    public boolean updateUser(User actor, String userIdToUpdate, String newName, String newUserName, String newPassword, Role newRole) {
+    public boolean updateUser(User actor, String userIdToUpdate, String newName, String newUserName, String newPassword,
+            Role newRole) {
         User userToUpdate = findUserById(userIdToUpdate);
         if (userToUpdate == null) {
             return false; // Usuario a actualizar no encontrado
@@ -109,7 +113,7 @@ public class UserManager {
             userToUpdate.setName(newName);
             userToUpdate.setUserName(newUserName);
             userToUpdate.setPassword(newPassword);
-                        // Un usuario estándar no puede cambiar su propio rol.
+            // Un usuario estándar no puede cambiar su propio rol.
             actor.addAction("Actualizó información de perfil.");
             return true;
         }
@@ -120,7 +124,8 @@ public class UserManager {
 
     /**
      * Delete: Elimina un usuario. Solo permitido para Administradores.
-     * @param actor El usuario que realiza la acción.
+     * 
+     * @param actor          El usuario que realiza la acción.
      * @param userIdToDelete El ID del usuario a eliminar.
      * @return true si el usuario fue encontrado y eliminado, false en caso
      *         contrario.
@@ -157,11 +162,11 @@ public class UserManager {
         return true;
     }
 
-    
     /**
      * Muestra el historial de acciones de un usuario específico.
      * Solo los administradores pueden ejecutar esta función.
-     * @param actor El administrador que realiza la solicitud.
+     * 
+     * @param actor        El administrador que realiza la solicitud.
      * @param userIdToView El ID del usuario cuyo historial se desea ver.
      */
     public void viewUserActions(User actor, String userIdToView) {
@@ -187,10 +192,10 @@ public class UserManager {
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             for (Action action : history) {
-                System.out.printf("Fecha: %s | Acción: %s\n", sdf.format(new Date(action.getTimestamp())), action.getDescription());
+                System.out.printf("Fecha: %s | Acción: %s\n", sdf.format(new Date(action.getTimestamp())),
+                        action.getDescription());
             }
         }
         System.out.println("-------------------------------------------");
     }
 }
-

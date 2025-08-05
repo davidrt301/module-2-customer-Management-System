@@ -19,7 +19,6 @@ public class User {
     private Role role;
     private Action[] actionHistory;
 
-
     public User(String userId, String userName, String name, String password, Role role) {
         this.userId = userId;
         this.userName = userName;
@@ -29,51 +28,41 @@ public class User {
         this.actionHistory = new Action[0];
     }
 
-
     public String getUserId() {
         return userId;
     }
-
 
     public String getUserName() {
         return userName;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public String getPassword() {
         return password;
     }
 
-
     public Role getRole() {
         return role;
     }
-
 
     public Action[] getActionHistory() {
         return actionHistory;
     }
 
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
 
     public void setName(String name) {
         this.name = name;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
     }
-
 
     public void setRole(Role role) {
         this.role = role;
@@ -83,6 +72,7 @@ public class User {
      * Registra una nueva acción en el historial del usuario usando un arreglo.
      * Esto demuestra la relación de composición: el User crea y posee sus Actions.
      * Cada vez que se llama, se crea un nuevo arreglo para almacenar la acción.
+     * 
      * @param description La descripción de la acción a registrar.
      */
     public void addAction(String description) {
@@ -90,7 +80,8 @@ public class User {
         Action newAction = new Action(description);
 
         // 2. Crear un nuevo arreglo con un espacio más.
-        // Usamos Arrays.copyOf para crear una copia del arreglo original con un tamaño mayor.
+        // Usamos Arrays.copyOf para crear una copia del arreglo original con un tamaño
+        // mayor.
         Action[] newHistory = Arrays.copyOf(this.actionHistory, this.actionHistory.length + 1);
 
         // 3. Añadir la nueva acción al final del nuevo arreglo.
@@ -100,9 +91,4 @@ public class User {
         this.actionHistory = newHistory;
     }
 
-    
-
-    
-    
-    
 }

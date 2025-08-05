@@ -18,12 +18,12 @@ public enum Role {
 
     /**
      * Constructor para el enumerado de roles.
+     * 
      * @param name El nombre legible del rol.
      */
     Role(String name) {
         this.name = name;
     }
-
 
     public String getName() {
         return name;

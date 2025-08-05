@@ -1,6 +1,5 @@
 package model;
 
-
 public class Action {
     private String description;
     private Long timestamp;
@@ -8,6 +7,7 @@ public class Action {
     /**
      * Constructor para una nueva acción.
      * Captura el momento exacto de la creación.
+     * 
      * @param description La descripción de la acción realizada.
      */
     public Action(String description) {
@@ -23,4 +23,3 @@ public class Action {
         return timestamp;
     }
 }
-
