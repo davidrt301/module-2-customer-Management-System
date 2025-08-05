@@ -1,0 +1,44 @@
+@startuml
+
+    class App {
+        +main(String[] args)
+    }
+    class UserManager {
+        -User[] users
+        +createUser(User, String, String, String, Role) User
+        +getUsers(User) User[]
+        +findUserById(String) User
+        +updateUser(User, String, ...) boolean
+        +deleteUser(User, String) boolean
+        +viewUserActions(User, String)
+    }
+    class User {
+        -String userId
+        -String userName
+        -String name
+        -Role role
+        -Action[] actionHistory
+        +addAction(String)
+        +getRole() Role
+        +getActionHistory() Action[]
+    }
+    class Action {
+        -String description
+        -Long timestamp
+        +Action(String)
+        +getDescription() String
+    }
+    class Role {
+        <<enumeration>>
+        ADMINISTRATOR
+        STANDARD
+        +getName() String
+    }
+
+    App ..> UserManager : uses
+    UserManager "1" o-- "*" User : manages
+    User "1" *-- "*" Action : owns
+    User "1" -- "1" Role : has
+
+
+@enduml
